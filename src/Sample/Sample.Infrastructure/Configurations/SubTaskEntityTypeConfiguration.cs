@@ -28,7 +28,7 @@ namespace Sample.Infrastructure.Configurations
             builder.HasOne(x => x.Task)
                 .WithMany(x => x!.SubTasks)
                 .HasForeignKey(x => x.TaskId)
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.NoAction);
 
             builder.HasOne(x => x.Employee)
                 .WithMany(x => x!.SubTasks)

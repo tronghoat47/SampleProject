@@ -19,8 +19,14 @@ namespace Sample.Infrastructure.Configurations
             builder.Property(x => x.EmployeeId).IsRequired();
             builder.Property(x => x.ProjectId).IsRequired();
             builder.Property(x => x.Role).IsRequired();
-            builder.HasOne(x => x.Employee).WithMany().HasForeignKey(x => x.EmployeeId).OnDelete(DeleteBehavior.NoAction);
-            builder.HasOne(x => x.Project).WithMany().HasForeignKey(x => x.ProjectId).OnDelete(DeleteBehavior.NoAction);
+            builder.HasOne(x => x.Employee)
+                .WithMany(e => e.Members)
+                .HasForeignKey(x => x.EmployeeId)
+                .OnDelete(DeleteBehavior.NoAction);
+            builder.HasOne(x => x.Project)
+                .WithMany(p => p.Members)
+                .HasForeignKey(x => x.ProjectId)
+                .OnDelete(DeleteBehavior.NoAction);
         }
     }
 }
